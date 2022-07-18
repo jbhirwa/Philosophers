@@ -9,7 +9,16 @@ void    *routine(void *voidP_brain)
     i = (t_individual *)voidP_brain;
     i->recent_meal = timestamp();
     if (i->Id % 2)
+    {
         usleep(15);//i->c->eat);
+        //printf("\t\tdone sleep %d", i->Id);
+        //printf(" fork id%d\n", i->f1);
+    }
+    else
+    {
+        //printf("\t\tnever sleep %d", i->Id);
+        //printf(" fork id %d\n", i->f1);
+    }
     while(!(i->c->dead))
    //while(1)
     {
@@ -55,7 +64,8 @@ void death_check(t_individual *i)
                 declare(&i[it], "dead");
                 i->c->dead = 1;
             }
-            usleep(100);
+            else
+                usleep(100);
         }
         if (i->c->dead)
             break ;
